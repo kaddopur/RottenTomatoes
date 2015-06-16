@@ -17,5 +17,6 @@
 @property NSArray *movies;
 @property (weak, nonatomic) IBOutlet UITableView *movieTable;
 @property UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UILabel *networkLabel;
 
 @end

@@ -40,6 +40,8 @@
         [SVProgressHUD showWithStatus:@"loading movies" maskType:SVProgressHUDMaskTypeGradient];
     }
     
+    [self.networkLabel setHidden:YES];
+    
     NSString *apiUrlString = @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=7ue5rxaj9xn4mhbmsuexug54&limit=20";
     NSURL *url = [NSURL URLWithString:apiUrlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -47,6 +49,11 @@
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (!data) {
+                                   [self.networkLabel setHidden:NO];
+                                   return;
+                               }
+                               
                                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                
                                self.movies = json[@"movies"];
