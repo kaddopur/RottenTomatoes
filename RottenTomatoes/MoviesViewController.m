@@ -14,12 +14,26 @@
 
 @implementation MoviesViewController
 
-NSArray *recipes;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.movies = [[NSArray alloc] init];
+    
+    NSString *apiUrlString = @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=7ue5rxaj9xn4mhbmsuexug54&limit=20";
+    NSURL *url = [NSURL URLWithString:apiUrlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    [NSURLConnection sendAsynchronousRequest:request
+                     queue:[NSOperationQueue mainQueue]
+                     completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                         
+                         self.movies = json[@"movies"];
+                         [self.movieTable reloadData];
+                     }];
 
-    recipes = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    self.movieTable.dataSource = self;
+    self.movieTable.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,7 +42,7 @@ NSArray *recipes;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [recipes count];
+    return [self.movies count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -39,7 +53,8 @@ NSArray *recipes;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:movieTableIdentifier];
     }
 
-    cell.textLabel.text = [recipes objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self.movies objectAtIndex:indexPath.row][@"title"];
+
     return cell;
 }
 

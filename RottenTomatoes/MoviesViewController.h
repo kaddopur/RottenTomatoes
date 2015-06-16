@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MoviesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property NSArray *movies;
 @property (weak, nonatomic) IBOutlet UITableView *movieTable;
 
 @end
