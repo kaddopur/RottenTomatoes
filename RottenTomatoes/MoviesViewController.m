@@ -52,13 +52,15 @@
     if (cell == nil) {
         cell = [[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:movieTableIdentifier];
     }
+    
+    NSDictionary *movie = self.movies[indexPath.row];
+    NSString *mpaaRating = movie[@"mpaa_rating"];
+    NSString *synopsis = movie[@"synopsis"];
+    NSURL *posterUrl = [NSURL URLWithString:[movie valueForKeyPath:@"posters.thumbnail"]];
 
-    cell.titleLabel.text = [self.movies objectAtIndex:indexPath.row][@"title"];
-    
-    NSString *mpaaRating = [self.movies objectAtIndex:indexPath.row][@"mpaa_rating"];
-    NSString *synopsis = [self.movies objectAtIndex:indexPath.row][@"synopsis"];
-    
+    cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = [NSString stringWithFormat:@"%@ %@", mpaaRating, synopsis];
+    [cell.posterView setImageWithURL:posterUrl];
 
     return cell;
 }
