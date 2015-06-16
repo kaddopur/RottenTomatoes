@@ -18,24 +18,44 @@
     [super viewDidLoad];
     
     self.movies = [[NSArray alloc] init];
-    [SVProgressHUD showWithStatus:@"loading movies" maskType:SVProgressHUDMaskTypeGradient];
+    
+    // init refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.movieTable addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(onRefreshWithoutHUD) forControlEvents:UIControlEventValueChanged];
+    
+    [self onRefresh:YES];
+    
+    // init tableView
+    self.movieTable.dataSource = self;
+    self.movieTable.delegate = self;
+}
+
+- (void)onRefreshWithoutHUD {
+    [self onRefresh:NO];
+}
+
+- (void)onRefresh:(BOOL)withHUD {
+    if (withHUD) {
+        [SVProgressHUD showWithStatus:@"loading movies" maskType:SVProgressHUDMaskTypeGradient];
+    }
     
     NSString *apiUrlString = @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=7ue5rxaj9xn4mhbmsuexug54&limit=20";
     NSURL *url = [NSURL URLWithString:apiUrlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     [NSURLConnection sendAsynchronousRequest:request
-                     queue:[NSOperationQueue mainQueue]
-                     completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                         
-                         self.movies = json[@"movies"];
-                         [SVProgressHUD dismiss];
-                         [self.movieTable reloadData];
-                     }];
-
-    self.movieTable.dataSource = self;
-    self.movieTable.delegate = self;
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                               
+                               self.movies = json[@"movies"];
+                               [self.movieTable reloadData];
+                               if (withHUD) {
+                                   [SVProgressHUD dismiss];
+                               }
+                           }];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {

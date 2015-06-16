@@ -13,7 +13,9 @@
 #import "SVProgressHUD.h"
 
 @interface MoviesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
 @property NSArray *movies;
 @property (weak, nonatomic) IBOutlet UITableView *movieTable;
+@property UIRefreshControl *refreshControl;
 
 @end
