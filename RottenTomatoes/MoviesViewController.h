@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MovieCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "DetailsViewController.h"
 
 @interface MoviesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property NSArray *movies;

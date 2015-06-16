@@ -16,6 +16,7 @@
 		AE441DBA1B2AFB1B00AD32C2 /* RottenTomatoesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE441DB91B2AFB1B00AD32C2 /* RottenTomatoesTests.m */; };
 		AE441DC51B2AFD9100AD32C2 /* MoviesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE441DC41B2AFD9100AD32C2 /* MoviesViewController.m */; };
 		AE56EC401B30305A00851CDF /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE56EC3F1B30305A00851CDF /* MovieCell.m */; };
+		AE56EC431B307C5A00851CDF /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE56EC421B307C5A00851CDF /* DetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		AE441DC41B2AFD9100AD32C2 /* MoviesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviesViewController.m; sourceTree = "<group>"; };
 		AE56EC3E1B30305A00851CDF /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
 		AE56EC3F1B30305A00851CDF /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
+		AE56EC411B307C5A00851CDF /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		AE56EC421B307C5A00851CDF /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		BECAA8A8CAD2E88DBB310B61 /* Pods-RottenTomatoes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RottenTomatoes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RottenTomatoes/Pods-RottenTomatoes.debug.xcconfig"; sourceTree = "<group>"; };
 		FE051A4C025B7D40BF9AF004 /* Pods-RottenTomatoes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RottenTomatoes.release.xcconfig"; path = "Pods/Target Support Files/Pods-RottenTomatoes/Pods-RottenTomatoes.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +154,8 @@
 			children = (
 				AE441DC31B2AFD9100AD32C2 /* MoviesViewController.h */,
 				AE441DC41B2AFD9100AD32C2 /* MoviesViewController.m */,
+				AE56EC411B307C5A00851CDF /* DetailsViewController.h */,
+				AE56EC421B307C5A00851CDF /* DetailsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE441DC51B2AFD9100AD32C2 /* MoviesViewController.m in Sources */,
+				AE56EC431B307C5A00851CDF /* DetailsViewController.m in Sources */,
 				AE441DA31B2AFB1B00AD32C2 /* AppDelegate.m in Sources */,
 				AE56EC401B30305A00851CDF /* MovieCell.m in Sources */,
 				AE441DA01B2AFB1B00AD32C2 /* main.m in Sources */,
