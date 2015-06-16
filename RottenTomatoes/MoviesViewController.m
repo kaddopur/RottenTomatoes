@@ -18,6 +18,7 @@
     [super viewDidLoad];
     
     self.movies = [[NSArray alloc] init];
+    [SVProgressHUD showWithStatus:@"loading movies" maskType:SVProgressHUDMaskTypeGradient];
     
     NSString *apiUrlString = @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=7ue5rxaj9xn4mhbmsuexug54&limit=20";
     NSURL *url = [NSURL URLWithString:apiUrlString];
@@ -29,6 +30,7 @@
                          NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                          
                          self.movies = json[@"movies"];
+                         [SVProgressHUD dismiss];
                          [self.movieTable reloadData];
                      }];
 

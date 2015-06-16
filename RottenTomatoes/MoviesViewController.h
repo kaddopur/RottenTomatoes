@@ -10,6 +10,7 @@
 #import "MovieCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
+#import "SVProgressHUD.h"
 
 @interface MoviesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property NSArray *movies;
