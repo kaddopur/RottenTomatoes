@@ -47,6 +47,10 @@
     return [self.movies count];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.movieTable deselectRowAtIndexPath:indexPath animated:NO];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *movieTableIdentifier = @"MovieCell";
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:movieTableIdentifier];
