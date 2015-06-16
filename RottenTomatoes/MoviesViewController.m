@@ -46,14 +46,19 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *movieTableIdentifier = @"MovieTableCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:movieTableIdentifier];
+    static NSString *movieTableIdentifier = @"MovieCell";
+    MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:movieTableIdentifier];
 
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:movieTableIdentifier];
+        cell = [[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:movieTableIdentifier];
     }
 
-    cell.textLabel.text = [self.movies objectAtIndex:indexPath.row][@"title"];
+    cell.titleLabel.text = [self.movies objectAtIndex:indexPath.row][@"title"];
+    
+    NSString *mpaaRating = [self.movies objectAtIndex:indexPath.row][@"mpaa_rating"];
+    NSString *synopsis = [self.movies objectAtIndex:indexPath.row][@"synopsis"];
+    
+    cell.synopsisLabel.text = [NSString stringWithFormat:@"%@ %@", mpaaRating, synopsis];
 
     return cell;
 }
