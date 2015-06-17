@@ -20,8 +20,23 @@
     self.titleLabel.text = self.movie[@"title"];
     self.synopsisLabel.text = self.movie[@"synopsis"];
     
+    NSURL *thumbUrl = [NSURL URLWithString:[self.movie valueForKeyPath:@"posters.thumbnail"]];
     NSURL *posterUrl = [self toHiResPosterUrl:[self.movie valueForKeyPath:@"posters.thumbnail"]];
-    [self.posterView setImageWithURL:posterUrl];
+    NSURLRequest *thumbRequest = [NSURLRequest requestWithURL:thumbUrl];
+    NSURLRequest *posterRequest = [NSURLRequest requestWithURL:posterUrl];
+    
+    [self.posterView setImageWithURLRequest:thumbRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [self.posterView setImage:image];
+    } failure:nil];
+    
+    [self.posterView setImageWithURLRequest:posterRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [UIView transitionWithView:self.posterView
+                          duration:0.4f
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            self.posterView.image = image;
+                        } completion:nil];
+    } failure:nil];
 }
 
 - (NSURL *)toHiResPosterUrl:(NSString *)thumbnailUrlString {
